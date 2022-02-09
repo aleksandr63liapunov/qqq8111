@@ -1,4 +1,4 @@
-package ru.alishev.springcourse;
+package conf.cont;
 
 import model.User;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ public class UserController {
         return "redirect:/user";
 
     }
-    @RequestMapping(value="delete/{id}", method=RequestMethod.GET)
+    @DeleteMapping ("/delete/{id}")
     public String deleteItem(@RequestParam (value = "id")int id) {
         User user = serviceint.getById(id);
         serviceint.delete(user);
