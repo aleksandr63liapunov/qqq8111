@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new people</title>
+</head>
+<body>
+<table>
+
+    <form action="/addnew" method="POST">
+        <label>id</label>
+        <input type="text" name="id">
+        <label>name</label>
+        <input type="text" name="name">
+        <label>age</label>
+        <input type="text" name="age">
+      <input type="submit" value="Add new ">
+    </form>
+    <a href="/user">back </a>
+</table>
+</body>
+</html>
