@@ -39,7 +39,7 @@ public class UserController {
     public String deleteItem(@RequestParam (value = "id")int id) {
         User user = serviceint.getById(id);
         serviceint.delete(user);
-       return "redirect:/user";
-    //    return "people";
+        return "redirect:/user";
+        //    return "people";
     }
 }
