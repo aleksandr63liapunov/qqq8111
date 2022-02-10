@@ -36,7 +36,7 @@ public class UserController {
 
     }
     @DeleteMapping ("/delete/{id}")
-    public String deleteItem(@RequestParam (value = "id")int id) {
+    public String deleteItem(@PathVariable ("id")int id) {
         User user = serviceint.getById(id);
         serviceint.delete(user);
         return "redirect:/user";
