@@ -7,12 +7,12 @@
 <body>
 <table>
 
-    <form th:method="PATCH" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${user}">
-        <label for="id">Enter name: </label>
+    <form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
+        <label for="id">Enter id: </label>
         <input type="text" th:field="*{id}" id="id"/>
         <label for="name">Enter name: </label>
         <input type="text" th:field="*{name}" id="name"/>
-        <label for="age">Enter name: </label>
+        <label for="age">Enter age: </label>
         <input type="text" th:field="*{age}" id="age"/>
         <br/>
         <input type="submit" value="Update!"/>
