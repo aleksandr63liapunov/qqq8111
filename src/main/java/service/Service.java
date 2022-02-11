@@ -44,4 +44,11 @@ public class Service implements Serviceint {
 
     }
 
+    @Override
+    public void update(int id, User userNew) {
+        if (id != 0) {
+            daoInt.update(id,userNew);
+        }
+    }
+
 }

@@ -18,6 +18,10 @@
         <td> <form th:method="DELETE" th:action="@{/delete/{id}(id = ${user.getId()})}">
             <input type="submit" value="delete">
         </form> </td>
+        <td>
+
+            <a href="/{id}/edit">update</a>
+        </td>
     </tr>
     <a href="/addnew">add</a>
 

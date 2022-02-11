@@ -16,7 +16,7 @@ public class UserController {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String getUserTab(Model model) {
         List<User> users = serviceint.getAll();
-        model.addAttribute("userlist", users); // ???userlist
+        model.addAttribute("userlist", users);
         return "people";
     }
 
@@ -35,11 +35,24 @@ public class UserController {
         return "redirect:/user";
 
     }
-    @DeleteMapping ("/delete/{id}")
-    public String deleteItem(@PathVariable ("id")int id) {
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteItem(@PathVariable("id") int id) {
         User user = serviceint.getById(id);
         serviceint.delete(user);
         return "redirect:/user";
         //    return "people";
     }
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("user", serviceint.getById(id));
+        return "user/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+        serviceint.update(id, user);
+        return "redirect:/user";
+    }
+
 }

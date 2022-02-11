@@ -9,4 +9,5 @@ public interface Serviceint {
     void delete(User user);
     List<User> getAll();
     User getById(int id);
+    void update(int id,User userNew);
 }

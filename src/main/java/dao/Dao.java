@@ -51,4 +51,12 @@ public class Dao implements DaoInt {
         //  }
         return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
     }
+
+    @Override
+    public void update(int id, User userNew) {
+        User updateUser=getById( id);
+        updateUser.setId(userNew.getId());
+        updateUser.setName(userNew.getName());
+        updateUser.setAge(userNew.getAge());
+    }
 }
