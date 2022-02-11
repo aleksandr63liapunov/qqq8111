@@ -20,7 +20,7 @@
         </form> </td>
         <td>
 
-            <a href="/{id}/edit">update</a>
+            <a th:href="@{/{id}(id = ${user.getId()})}">update</a>
         </td>
     </tr>
     <a href="/addnew">add</a>
