@@ -3,12 +3,16 @@ package service;
 import dao.Dao;
 import dao.DaoInt;
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public class Service implements Serviceint {
+    @Autowired
     private DaoInt daoInt = new Dao();
 
+    @Transactional
     @Override
     public void save(User user) {
         List<User> users = null;
@@ -23,6 +27,7 @@ public class Service implements Serviceint {
 
     }
 
+    @Transactional
     @Override
     public void delete(User user) {
         if (user != null) {
@@ -31,23 +36,27 @@ public class Service implements Serviceint {
 
     }
 
+    @Transactional
     @Override
     public List<User> getAll() {
         return daoInt.getAll();
     }
 
+    @Transactional
     @Override
     public User getById(int id) {
-
-        return daoInt.getById(id);
-
+        if (id != 0) {
+            return daoInt.getById(id);
+        }
+        return null;
 
     }
 
+    @Transactional
     @Override
     public void update(int id, User userNew) {
         if (id != 0) {
-            daoInt.update(id,userNew);
+            daoInt.update(id, userNew);
         }
     }
 

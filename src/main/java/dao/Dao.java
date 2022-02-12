@@ -2,19 +2,23 @@ package dao;
 
 import model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Dao implements DaoInt {
     private List<User> users = new ArrayList<>();
+    private static int count;
 
     public Dao() {
         User user = new User();
-        user.setId(1);
+        user.setId(++count);
         user.setName("qq");
         user.setAge(5);
         User user2 = new User();
-        user2.setId(2);
+        user2.setId(++count);
         user2.setName("ww");
         user2.setAge(2);
         users.add(user);
@@ -22,22 +26,31 @@ public class Dao implements DaoInt {
 
     }
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Transactional
     @Override
     public void save(User user) {
-        users.add(user);
+        entityManager.persist(user);
 
     }
 
+    @Transactional
     @Override
     public void delete(User user) {
-        users.remove(user);
+
+        entityManager.remove(user);
     }
 
+    @Transactional
     @Override
     public List<User> getAll() {
-        return users;
+
+        return entityManager.createQuery("select user from User user ", User.class).getResultList();
     }
 
+    @Transactional
     @Override
     public User getById(int id) {
 //        for (User user : users)
@@ -49,14 +62,17 @@ public class Dao implements DaoInt {
 //        }
 //        return null;
         //  }
-        return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
+//        return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
+        return entityManager.find(User.class, id);
     }
 
+    @Transactional
     @Override
     public void update(int id, User userNew) {
-        User updateUser=getById( id);
-        updateUser.setId(userNew.getId());
-        updateUser.setName(userNew.getName());
-        updateUser.setAge(userNew.getAge());
+//       User updateUser=getById( id);
+//        updateUser.setId(userNew.getId());
+//        updateUser.setName(userNew.getName());
+//        updateUser.setAge(userNew.getAge());
+        entityManager.merge(userNew);
     }
 }

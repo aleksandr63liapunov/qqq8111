@@ -3,14 +3,14 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "qwerty")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+    @Column(name = "name")
     private String name;
-    @Column
+    @Column(name = "age")
     private int age;
 
     public User(int id, String name, int age) {
