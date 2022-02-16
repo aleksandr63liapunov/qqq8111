@@ -1,13 +1,14 @@
 package dao;
 
 import model.User;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class Dao implements DaoInt {
     private List<User> users = new ArrayList<>();
     private static int count;

@@ -4,10 +4,12 @@ import dao.Dao;
 import dao.DaoInt;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-
+@org.springframework.stereotype.Service
+@org.springframework.transaction.annotation.Transactional
 public class Service implements Serviceint {
     @Autowired
     private DaoInt daoInt = new Dao();
