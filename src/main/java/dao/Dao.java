@@ -73,6 +73,7 @@ public class Dao implements DaoInt {
 //        updateUser.setId(userNew.getId());
 //        updateUser.setName(userNew.getName());
 //        updateUser.setAge(userNew.getAge());
+        userNew.setId(id);
         entityManager.merge(userNew);
     }
 }
