@@ -19,6 +19,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
@@ -41,23 +43,35 @@ public class HibernateConfig {
     }
 
     @Bean
-    public LocalSessionFactoryBean getSessionFactory() {
-        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setDataSource(getDataSource());
+    public LocalContainerEntityManagerFactoryBean managerFactoryBean() {
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(getDataSource());
+        em.setPackagesToScan("model");
+        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        em.setJpaProperties(getHibernateProperties());
+        return em;
+    }
 
-        Properties props=new Properties();
-        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-
-        factoryBean.setHibernateProperties(props);
-        factoryBean.setAnnotatedClasses(User.class);
-        return factoryBean;
+    private Properties getHibernateProperties() {
+        Properties properties = new Properties();
+//        try {
+//            Properties properties = new Properties();
+//            InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties");
+//            properties.load(is);
+//            return properties;
+//        } catch (IOException e) {
+//            throw new IllegalArgumentException("cant find hiber.prop");
+//        }
+        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        properties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        return properties;
     }
 
     @Bean
-    public HibernateTransactionManager getTransactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory().getObject());
-        return transactionManager;
+    public PlatformTransactionManager platformTransactionManager() {
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(managerFactoryBean().getObject());
+        return jpaTransactionManager;
     }
 }
