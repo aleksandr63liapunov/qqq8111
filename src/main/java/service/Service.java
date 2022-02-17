@@ -11,7 +11,7 @@ import java.util.List;
 @org.springframework.transaction.annotation.Transactional
 public class Service implements Serviceint {
 
-    private DaoInt daoInt ;
+    private final DaoInt daoInt ;
 @Autowired
     public Service() {
         this.daoInt=daoInt;
