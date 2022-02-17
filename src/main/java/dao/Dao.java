@@ -48,7 +48,7 @@ public class Dao implements DaoInt {
     @Override
     public List<User> getAll() {
 
-        return entityManager.createQuery("select user from User user ", User.class).getResultList();
+        return entityManager.createQuery("select e from User e ", User.class).getResultList();
     }
 
     @Transactional

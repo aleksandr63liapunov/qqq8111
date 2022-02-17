@@ -1,6 +1,7 @@
 package conf.cont;
 
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +12,11 @@ import java.util.List;
 
 @Controller
 public class UserController {
-    private Serviceint serviceint = new Service();
-
+    private Serviceint serviceint ;
+    @Autowired
+    public UserController(Serviceint serviceint) {
+        this.serviceint = serviceint;
+    }
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String getUserTab(Model model) {
         List<User> users = serviceint.getAll();
