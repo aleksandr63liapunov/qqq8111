@@ -27,7 +27,7 @@ import java.util.Properties;
 @EnableJpaRepositories
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScan("conf.cont")
+@ComponentScan({"conf.cont","dao","service","model"})
 public class HibernateConfig {
     @Autowired
     private Environment env;
