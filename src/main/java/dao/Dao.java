@@ -2,30 +2,31 @@ package dao;
 
 import model.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 @Repository
 public class Dao implements DaoInt {
-    private List<User> users = new ArrayList<>();
-    private static int count;
-
-    public Dao() {
-        User user = new User();
-        user.setId(++count);
-        user.setName("qq");
-        user.setAge(5);
-        User user2 = new User();
-        user2.setId(++count);
-        user2.setName("ww");
-        user2.setAge(2);
-        users.add(user);
-        users.add(user2);
-
-    }
+//    private List<User> users = new ArrayList<>();
+//    private static int count;
+//
+//    public Dao() {
+//        User user = new User();
+//        user.setId(++count);
+//        user.setName("qq");
+//        user.setAge(5);
+//        User user2 = new User();
+//        user2.setId(++count);
+//        user2.setName("ww");
+//        user2.setAge(2);
+//        users.add(user);
+//        users.add(user2);
+//
+//    }
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -39,9 +40,9 @@ public class Dao implements DaoInt {
 
     @Transactional
     @Override
-    public void delete(User user) {
-
-        entityManager.remove(user);
+    public void delete(int id) {
+        entityManager.remove(entityManager.find(User.class, id));
+//        entityManager.remove(user);
     }
 
     @Transactional

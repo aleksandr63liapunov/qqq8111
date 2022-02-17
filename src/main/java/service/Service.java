@@ -21,24 +21,24 @@ public class Service implements Serviceint {
     @Transactional
     @Override
     public void save(User user) {
-        List<User> users = null;
-        if (user != null) {
-            users = daoInt.getAll();
-        }
-        if (!users.isEmpty()) {
-            User lastUser = users.get(users.size() - 1);
-            user.setId(lastUser.getId() + 1);
-            daoInt.save(user);
-        }
-
+//        List<User> users = null;
+//        if (user != null) {
+//            users = daoInt.getAll();
+//        }
+//        if (!users.isEmpty()) {
+//            User lastUser = users.get(users.size() - 1);
+//            user.setId(lastUser.getId() + 1);
+//            daoInt.save(user);
+//        }
+       daoInt.save(user);
     }
 
-    @Transactional
+
     @Override
-    public void delete(User user) {
-        if (user != null) {
-            daoInt.delete(user);
-        }
+    public void delete(int id) {
+
+            daoInt.delete(id);
+
 
     }
 

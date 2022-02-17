@@ -7,7 +7,7 @@ import java.util.List;
 public interface DaoInt {
     void save(User user);
 
-    void delete(User user);
+    void delete(int id);
 
     List<User> getAll();
 
